@@ -28,3 +28,7 @@ Experimental Thunderbird Support regular expression scanner
 link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
 2023-2024-yearly-thunderbird-answers.csv
 ```
+## 3. BUG! The iso_weeks don't have the year! So iso_week is wrong! and the output below is wrong
+```bash
+mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv filter '${oa:oauth} == "1"' then cut -f link,iso_week,yyyy_mm_dd then sort -f iso_week then count-distinct -f iso_week
+```
