@@ -7,7 +7,8 @@ mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yea
 filter '${oa:oauth} == "1"' \
 then cut -f link,iso_week,yyyy_mm_dd \
 then sort -f iso_week \
-then count -g iso_week -o "OAuth mentions"
+then count -g iso_week -o "OAuth mentions" \
+> 2023-2024-thunderbird-oauth-mentions.csv
 ```
 
 <details markdown="1">
