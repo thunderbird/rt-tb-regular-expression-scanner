@@ -15,7 +15,7 @@ Experimental Thunderbird Support regular expression scanner
 1. add yyyy_mm_dd, iso_week and link field to question CSV
    ```bash
    mlr --csv put '$created_epoch = strptime($created, "%Y-%m-%d %H:%M:%S %z")' \
-   then put -f ../make-question-link.mlr \
+   then put -f make-question-link.mlr \
    then put '$iso_week = strftime($created_epoch, "%V")' \
    then  put '$yyyy_mm_dd = strftime($created_epoch, "%Y-%m-%d")' \
    2023-2024-yearly-thunderbird-questions.csv \
