@@ -61,7 +61,9 @@ then cut -f link,iso_week,yyyy_mm_dd \
 then sort -f iso_week \
 then count-distinct -f iso_week
 ```
-output:
+<details markdown="1">
+<summary markdown="span">output:</summary>
+   
 ```
 iso_week,count
 2023-13,1
@@ -149,3 +151,4 @@ iso_week,count
 2024-43,8
 2024-44,6
 ```
+</details>
