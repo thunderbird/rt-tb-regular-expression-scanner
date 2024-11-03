@@ -1,5 +1,26 @@
 # rt-tb-regular-expression-scanner
 Experimental Thunderbird Support regular expression scanner
+## 2. 2024-11-03 add microsoft email and gmail and all the other mentions
+
+**microsoft email:**
+
+```bash
+mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
+filter '${m:microsoftemail} == "1"' \
+then cut -f link,iso_week,yyyy_mm_dd \
+then sort -f iso_week \
+then count -g iso_week -o "ms email mentions" > 2023-2024-thunderbird-microsoft-email-mentions.csv
+```
+
+**gmail email:**
+```bash
+mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
+filter '${m:gmail} == "1"' \
+then cut -f link,iso_week,yyyy_mm_dd \
+then sort -f iso_week \
+then count -g iso_week -o "ms email mentions" > 2023-2024-thunderbird-gmail-email-mentions.csv
+```
+
 ## 1. 2024-11-03 Rename the count field to "OAuth mentions"
 
 ```bash
