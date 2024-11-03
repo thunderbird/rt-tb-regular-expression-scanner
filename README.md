@@ -18,7 +18,7 @@ mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yea
 filter '${m:gmail} == "1"' \
 then cut -f link,iso_week,yyyy_mm_dd \
 then sort -f iso_week \
-then count -g iso_week -o "ms email mentions" > 2023-2024-thunderbird-gmail-email-mentions.csv
+then count -g iso_week -o "gmail mentions" > 2023-2024-thunderbird-gmail-email-mentions.csv
 ```
 
 ## 1. 2024-11-03 Rename the count field to "OAuth mentions"
