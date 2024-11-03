@@ -48,3 +48,8 @@ then sort -f id \
 ```
 
 ## 5.  2024-11-02 With iso_week in the form yyyy-iso_week Add: oauth, hotmail/office365/o365, gmail/googlemail etc synthetic boolean columns
+```bash
+./scan-tb-question-answer-file.rb \
+link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
+2023-2024-yearly-thunderbird-answers.csv
+```
