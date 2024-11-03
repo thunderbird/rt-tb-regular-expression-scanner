@@ -95,8 +95,7 @@ all_questions.each do |q|
   #  id, date, title, os, topic, email, antivirus, userchrome, tags
   #  128958, 2023-04-01, emoji;windows 10;win10, emoji;fix-problems;fix_problmes, emoji;outlook;microsoftemail, emoji:avtext;kaspersky, emoji:userchrometext;unsupported_customizations, tags
 end
-binding.pry
-headers = all_questions.to_a[0].keys
-CSV.open(OUTPUT_FILENAME, 'w', write_headers: true, headers: headers) do |csv_object|
-  all_questions.to_a.each { |row_array| csv_object << row_array }
+CSV.open(OUTPUT_FILENAME, 'w') do |csv_object|
+  csv_object << all_questions.headers
+  all_questions.each { |row_array| csv_object << row_array }
 end
