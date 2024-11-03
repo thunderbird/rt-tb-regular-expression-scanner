@@ -9,6 +9,6 @@ Experimental Thunderbird Support regular expression scanner
    ```
 1. create 2023 and 2024 question CSV:
    ```bash
-   mlr --csv sort -f id /Users/roland/Documents/GIT/github-action-thunderbird-aaq/202*/*thunderbird-creator-answers-desktop-all-locales \
+   mlr --csv sort -f id /Users/roland/Documents/GIT/github-action-thunderbird-aaq/202*/*thunderbird-creator-answers-desktop-all-locales.csv \
    > 2023-2024-yearly-thunderbird-questions.csv
    ```
