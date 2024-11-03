@@ -30,7 +30,11 @@ link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
 ```
 ## 3. 2024-11-02 BUG! The iso_weeks don't have the year! So iso_week is wrong! and the output below is wrong
 ```bash
-mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv filter '${oa:oauth} == "1"' then cut -f link,iso_week,yyyy_mm_dd then sort -f iso_week then count-distinct -f iso_week
+mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
+filter '${oa:oauth} == "1"' \
+then cut -f link,iso_week,yyyy_mm_dd \
+then sort -f iso_week \
+then count-distinct -f iso_week
 ```
 ## 4. 2024-11-02 Fix bug in iso_week
 ```bash
@@ -42,3 +46,5 @@ then sort -f id \
 2023-2024-yearly-thunderbird-questions.csv \
 > link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv
 ```
+
+## 5.  2024-11-02 With iso_week in the form yyyy-iso_week Add: oauth, hotmail/office365/o365, gmail/googlemail etc synthetic boolean columns
