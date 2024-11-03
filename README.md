@@ -18,7 +18,7 @@ Experimental Thunderbird Support regular expression scanner
    then put -f make-question-link.mlr \
    then put '$iso_week = strftime($created_epoch, "%V")' \
    then  put '$yyyy_mm_dd = strftime($created_epoch, "%Y-%m-%d")' \
-   2023-2024-yearly-thunderbird-questions.csv \
    then sort -f id \
+   2023-2024-yearly-thunderbird-questions.csv \
    > link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv
    ```
