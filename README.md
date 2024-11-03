@@ -22,4 +22,9 @@ Experimental Thunderbird Support regular expression scanner
    2023-2024-yearly-thunderbird-questions.csv \
    > link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv
    ```
-## 2. 2024-11-02 Add: oauth, hotmail/office365/o365, gmail/googlemail synthetic columns
+## 2. 2024-11-02 Add: oauth, hotmail/office365/o365, gmail/googlemail etc synthetic boolean columns
+```bash
+./scan-tb-question-answer-file.rb \
+link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
+2023-2024-yearly-thunderbird-answers.csv
+```
