@@ -84,16 +84,6 @@ all_questions.each do |q|
   oauth_flags.each { |f| q[f[:name]] = f[:value] }
   av_flags = get_binary_flags_from_regex(ANTIVIRUS_EMOJI_ARRAY, content, 'av:unknown')
   av_flags.each { |f| q[f[:name]] = f[:value] }
-  # os_emoji_content[:name] = get_os_name(os_emoji_content[:emoji], os_emoji_content[:matching_text],
-  #                                       os_emoji_content[:name], logger)
-  # topics_emoji_content = get_emojis_from_regex(TOPICS_EMOJI_ARRAY, q['tags'], 't:unknown')
-  # email_emoji_content = get_emojis_from_regex(EMAIL_EMOJI_ARRAY, content, 'm:unknown')
-  # av_emoji_content = get_emojis_from_regex(ANTIVIRUS_EMOJI_ARRAY, content, 'av:unknown')
-  # userchrome_emoji_content = get_emojis_from_regex(USERCHROME_EMOJI_ARRAY, content, 'uc:unknown')
-
-  #  regular_expression_row is:
-  #  id, date, title, os, topic, email, antivirus, userchrome, tags
-  #  128958, 2023-04-01, emoji;windows 10;win10, emoji;fix-problems;fix_problmes, emoji;outlook;microsoftemail, emoji:avtext;kaspersky, emoji:userchrometext;unsupported_customizations, tags
 end
 CSV.open(OUTPUT_FILENAME, 'w') do |csv_object|
   csv_object << all_questions.headers
