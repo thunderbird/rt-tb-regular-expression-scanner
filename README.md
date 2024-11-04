@@ -1,6 +1,12 @@
 # rt-tb-regular-expression-scanner
 Experimental Thunderbird Support regular expression scanner
 
+## 7. Plot 2024 Week 24 to 2024 Week 43
+* 2024-week-24-2024-week43-plot-2023-2024-tb-oauth-microsoft-email-gmail-antivirus-mentions.R and PLOTS/2024-week-24-2024-week43-plot-2023-2024-tb-oauth-microsoft-email-gmail-antivirus-mentions.png
+## 6. Plot 2024 Week 1 to 2024 Week 43
+* 2024-week-1-2024-week43-plot-2023-2024-tb-oauth-microsoft-email-gmail-antivirus-mentions.R and PLOTS/2024-week-1-2024-week43-plot-2023-2024-tb-oauth-microsoft-email-gmail-antivirus-mentions.png
+## 5. Plot 2023 Week 14 to 2024 Week 43
+* 2023-week-14-2024-week43-plot-2023-2024-tb-oauth-microsoft-email-gmail-antivirus-mentions.R and PLOTS/2023-week-14-2024-week43-plot-2023-2024-tb-oauth-microsoft-email-gmail-antivirus-mentions.png
 ## 4. 2024-11-03 concat all the files with regex mentions: anti-virus, microsoft email, gmail, oauth
 ```bash
 mlr --csv join -f 2023-2024-thunderbird-oauth-mentions.csv -j iso_week \
