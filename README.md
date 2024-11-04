@@ -4,7 +4,7 @@ Experimental Thunderbird Support regular expression scanner
 ## 3. 2024-11-03 add anti-virus
 ```bash
 mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
-filter '${av:unknown} == "9"' \
+filter '${av:unknown} == "0"' \
 then cut -f link,iso_week,yyyy_mm_dd \
 then sort -f iso_week \
 then count -g iso_week -o "antivirus mentions" > 2023-2024-thunderbird-antivirus-mentions.csv
