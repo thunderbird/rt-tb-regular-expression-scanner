@@ -1,6 +1,14 @@
 # rt-tb-regular-expression-scanner
 Experimental Thunderbird Support regular expression scanner
 
+## 4. 2024-11-03 concat all the files with regex mentions: anti-virus, microsoft email, gmail, oauth
+```bash
+mlr --csv join -f 2023-2024-thunderbird-oauth-mentions.csv -j iso_week \
+then join -f 2023-2024-thunderbird-microsoft-email-mentions.csv -j iso_week \
+then join -f 2023-2024-thunderbird-gmail-email-mentions.csv -j iso_week \
+2023-2024-thunderbird-antivirus-mentions.csv \
+> 2023-2024-tb-oauth-microsoft-email-gmail-antivirus-mentions.csv
+```
 ## 3. 2024-11-03 add anti-virus
 ```bash
 mlr --csv --from regex-matches-link_epoch_time_yyyy_mm_dd_iso_week_2023-2024-yearly-thunderbird-questions.csv \
