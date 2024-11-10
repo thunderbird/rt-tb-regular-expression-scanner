@@ -34,16 +34,14 @@ def get_binary_flags_from_regex(emoji_regex, content, unknown_name)
   binary_flags
 end
 
-def get_os_name(emoji, matching_text, name, logger)
-  logger.debug "emoji: #{emoji} matching_text: #{matching_text} name: #{name}"
-  return name if [MACOS_EMOJI, LINUX_EMOJI].include?(emoji)
-  return 'os:unknown' if emoji == UNKNOWN_EMOJI
-  return 'os:win7' if matching_text =~ /win[a-z\- ]*7/i
-  return 'os:win8' if matching_text =~ /win[a-z\- ]*8/i
-  return 'os:win10' if matching_text =~ /win[a-z\- ]*10/i
-  return 'os:win11' if matching_text =~ /win[a-z\- ]*11/i
+def get_windows_version(name, logger)
+  logger.debug "get_windows_version: name: #{name}"
+  return 7 if name =~ /win[a-z\- ]*7/i
+  return 8 if name =~ /win[a-z\- ]*8/i
+  return 10 if name =~ /win[a-z\- ]*10/i
+  return 11 if name =~ /win[a-z\- ]*11/i
 
-  name
+  0
 end
 
 logger = Logger.new($stderr)
@@ -63,7 +61,6 @@ logger.debug("output_filename: #{OUTPUT_FILENAME}")
 all_questions = CSV.read(QUESTION_FILENAME, headers: true)
 all_answers = CSV.read(ANSWER_FILENAME, headers: true)
 
-regular_expressions = []
 all_questions.each do |q|
   content = "#{q['title']} #{q['content']}"
   question_creator = q['creator']
@@ -78,6 +75,8 @@ all_questions.each do |q|
 
   os_flags = get_binary_flags_from_regex(OS_EMOJI_ARRAY, content, 'os:unknown')
   os_flags.each { |f| q[f[:name]] = f[:value] }
+  q['windows'] = q['os:windows'] ? get_windows_version(content, logger) : 0
+  logger.debug "windows version: #{q['windows']}"
   email_flags = get_binary_flags_from_regex(EMAIL_EMOJI_ARRAY, content, 'm:unknown')
   email_flags.each { |f| q[f[:name]] = f[:value] }
   oauth_flags = get_binary_flags_from_regex(OAUTH_EMOJI_ARRAY, content, 'oa:unknown')
