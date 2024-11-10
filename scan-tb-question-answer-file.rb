@@ -98,6 +98,9 @@ all_questions.each do |q|
   av_flags_and_emoji = get_binary_flags_from_regex(ANTIVIRUS_EMOJI_ARRAY, content, 'av:unknown')
   av_flags_and_emoji[:flags].each { |f| q[f[:name]] = f[:value] }
   emoji_str += "AV:#{av_flags_and_emoji[:emoji]}"
+  uc_flags_and_emoji = get_binary_flags_from_regex(USERCHROME_EMOJI_ARRAY, content, 'uc:unknown')
+  uc_flags_and_emoji[:flags].each { |f| q[f[:name]] = f[:value] }
+  emoji_str += "UC:#{uc_flags_and_emoji[:emoji]}"
   q['emoji'] = emoji_str
 end
 CSV.open(OUTPUT_FILENAME, 'w') do |csv_object|
