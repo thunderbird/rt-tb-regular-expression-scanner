@@ -18,8 +18,10 @@ end
 def get_binary_flags_from_regex(emoji_regex, content, unknown_name)
   binary_flags = []
   match = false
+  emoji_string = ''
   emoji_regex.each do |r|
     if r[:regex] =~ content
+      emoji_string += r[:emoji]
       binary_flags.push({ name: r[:name], value: 1 })
       match = true
     else
@@ -30,8 +32,9 @@ def get_binary_flags_from_regex(emoji_regex, content, unknown_name)
     binary_flags.push({ name: unknown_name, value: 0 })
   else
     binary_flags.push({ name: unknown_name, value: 1 })
+    emoji_string = UNKNOWN_EMOJI
   end
-  binary_flags
+  {flags: binary_flags, emoji: emoji_string}
 end
 
 def get_windows_version(name, logger)
@@ -65,6 +68,7 @@ all_questions.each do |q|
   content = "#{q['title']} #{q['content']}"
   question_creator = q['creator']
   id = q['id']
+  emoji_str = 'OS:'
 
   all_answers.select { |a| a['question_id'] == id }.each do |a|
     content += " #{a['content']}" if a['creator'] == question_creator
@@ -73,16 +77,28 @@ all_questions.each do |q|
   content.downcase!
   logger.debug "question id: #{id}"
 
-  os_flags = get_binary_flags_from_regex(OS_EMOJI_ARRAY, content, 'os:unknown')
+  os_flags_and_emoji = get_binary_flags_from_regex(OS_EMOJI_ARRAY, content, 'os:unknown')
+  os_flags = os_flags_and_emoji[:flags]
   os_flags.each { |f| q[f[:name]] = f[:value] }
-  q['windows'] = q['os:windows'] ? get_windows_version(content, logger) : 0
+  emoji_str += os_flags_and_emoji[:emoji]
+  if os_flags_and_emoji[:emoji] == WINDOWS_EMOJI
+    windows_version = get_windows_version(content, logger) 
+    emoji_str += "#{windows_version}"
+    q['windows'] = windows_version
+  else
+    q['windows'] = 0
+  end
   logger.debug "windows version: #{q['windows']}"
-  email_flags = get_binary_flags_from_regex(EMAIL_EMOJI_ARRAY, content, 'm:unknown')
-  email_flags.each { |f| q[f[:name]] = f[:value] }
-  oauth_flags = get_binary_flags_from_regex(OAUTH_EMOJI_ARRAY, content, 'oa:unknown')
-  oauth_flags.each { |f| q[f[:name]] = f[:value] }
-  av_flags = get_binary_flags_from_regex(ANTIVIRUS_EMOJI_ARRAY, content, 'av:unknown')
-  av_flags.each { |f| q[f[:name]] = f[:value] }
+  email_flags_and_emoji = get_binary_flags_from_regex(EMAIL_EMOJI_ARRAY, content, 'm:unknown')
+  email_flags_and_emoji[:flags].each { |f| q[f[:name]] = f[:value] }
+  emoji_str += "E:#{email_flags_and_emoji[:emoji]}"
+  oauth_flags_and_emoji = get_binary_flags_from_regex(OAUTH_EMOJI_ARRAY, content, 'oa:unknown')
+  oauth_flags_and_emoji[:flags].each { |f| q[f[:name]] = f[:value] }
+  emoji_str += "O:#{oauth_flags_and_emoji[:emoji]}"
+  av_flags_and_emoji = get_binary_flags_from_regex(ANTIVIRUS_EMOJI_ARRAY, content, 'av:unknown')
+  av_flags_and_emoji[:flags].each { |f| q[f[:name]] = f[:value] }
+  emoji_str += "AV:#{av_flags_and_emoji[:emoji]}"
+  q['emoji'] = emoji_str
 end
 CSV.open(OUTPUT_FILENAME, 'w') do |csv_object|
   csv_object << all_questions.headers
